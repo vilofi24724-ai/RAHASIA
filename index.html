@@ -1,379 +1,1890 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Victor ❤️</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+
+<title>
+Happy Birthday Victor 🤍
+</title>
+
+
+<meta name="description"
+content="A special birthday story made with love for Victor">
+
+
+<!-- FONT -->
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&display=swap"
+rel="stylesheet">
+
+
+<!-- ICON -->
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+
+<!-- CSS -->
+
+<link rel="stylesheet"
+href="style.css">
+
+
 </head>
+
+
+
 <body>
-    <!-- LOADING SCREEN -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loader-container">
-            <div class="loader"></div>
-            <p>Mempersiapkan hadiah spesial...</p>
-        </div>
-    </div>
 
-    <!-- QUIZ SECTION -->
-    <section class="quiz-section" id="quizSection">
-        <div class="quiz-container">
-            <div class="quiz-content" data-aos="fade-up">
-                <h1 class="quiz-title">Selamat datang ❤️</h1>
-                <p class="quiz-subtitle">Sebelum membuka hadiah spesial ini, ada beberapa pertanyaan yang harus kamu jawab ❤️</p>
 
-                <form class="quiz-form" id="quizForm">
-                    <!-- QUESTION 1 -->
-                    <div class="question-block" data-aos="fade-up" data-aos-delay="100">
-                        <h3 class="question-title">1. Siapa orang paling ganteng di dunia?</h3>
-                        <div class="options">
-                            <label class="option">
-                                <input type="radio" name="q1" value="aku" required>
-                                <span class="option-text">Aku</span>
-                            </label>
-                            <label class="option">
-                                <input type="radio" name="q1" value="aku-dong">
-                                <span class="option-text">Aku dong</span>
-                            </label>
-                            <label class="option">
-                                <input type="radio" name="q1" value="jelas-aku">
-                                <span class="option-text">Jelas aku</span>
-                            </label>
-                            <label class="option">
-                                <input type="radio" name="q1" value="tetap-aku">
-                                <span class="option-text">Tetap aku</span>
-                            </label>
-                        </div>
-                    </div>
 
-                    <!-- QUESTION 2 -->
-                    <div class="question-block" data-aos="fade-up" data-aos-delay="200">
-                        <h3 class="question-title">2. Siapa yang paling sayang sama kamu?</h3>
-                        <div class="options">
-                            <label class="option">
-                                <input type="radio" name="q2" value="kamu" required>
-                                <span class="option-text">Kamu</span>
-                            </label>
-                            <label class="option">
-                                <input type="radio" name="q2" value="aku">
-                                <span class="option-text">Aku</span>
-                            </label>
-                            <label class="option">
-                                <input type="radio" name="q2" value="kita">
-                                <span class="option-text">Kita berdua</span>
-                            </label>
-                            <label class="option">
-                                <input type="radio" name="q2" value="jawaban-benar">
-                                <span class="option-text">Jawaban yang benar: Aku</span>
-                            </label>
-                        </div>
-                    </div>
+<!-- ==============================
+LOADING SCREEN
+============================== -->
 
-                    <!-- QUESTION 3 -->
-                    <div class="question-block" data-aos="fade-up" data-aos-delay="300">
-                        <h3 class="question-title">3. Kalau disuruh pilih:</h3>
-                        <div class="options">
-                            <label class="option">
-                                <input type="radio" name="q3" value="motor" required>
-                                <span class="option-text">🏍️ Motor</span>
-                            </label>
-                            <label class="option">
-                                <input type="radio" name="q3" value="game">
-                                <span class="option-text">🎮 Game</span>
-                            </label>
-                            <label class="option">
-                                <input type="radio" name="q3" value="aku">
-                                <span class="option-text">❤️ Aku</span>
-                            </label>
-                        </div>
-                    </div>
 
-                    <!-- QUESTION 4 -->
-                    <div class="question-block" data-aos="fade-up" data-aos-delay="400">
-                        <h3 class="question-title">4. Apa harapan kamu untuk hubungan kita?</h3>
-                        <textarea 
-                            name="q4" 
-                            class="text-input" 
-                            placeholder="Tulis harapanmu di sini..." 
-                            required
-                            maxlength="500"
-                        ></textarea>
-                        <span class="char-count"><span id="charCount">0</span>/500</span>
-                    </div>
+<div 
+id="loadingScreen"
+class="loading-screen">
 
-                    <button type="submit" class="submit-btn" data-aos="fade-up" data-aos-delay="500">
-                        <span>Kirim Jawaban</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
 
-        <!-- QUIZ BACKGROUND EFFECT -->
-        <div class="quiz-bg-elements">
-            <div class="bg-orb bg-orb-1"></div>
-            <div class="bg-orb bg-orb-2"></div>
-            <div class="bg-orb bg-orb-3"></div>
-        </div>
-    </section>
+<div class="loading-container">
 
-    <!-- MAIN CONTENT -->
-    <main class="main-content" id="mainContent" style="display: none;">
-        
-        <!-- HERO SECTION -->
-        <section class="hero" id="heroSection">
-            <canvas id="particleCanvas"></canvas>
-            
-            <div class="hero-overlay"></div>
-            <div class="hero-mist"></div>
 
-            <!-- Background Video (Optional - jika tidak ada, akan pakai gradient) -->
-            <video class="hero-video" autoplay muted loop playsinline>
-                <source src="video.mp4" type="video/mp4">
-            </video>
+<div class="loading-symbol">
 
-            <!-- Stars -->
-            <div class="stars-container">
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-            </div>
+✦
 
-            <div class="hero-content">
-                <h1 class="hero-title" data-aos="fade-up">
-                    <span class="title-line">HAPPY BIRTHDAY</span>
-                    <span class="title-name">VICTOR</span>
-                    <span class="title-heart">❤️</span>
-                </h1>
-                <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
-                    Untuk seseorang yang selalu menjadi alasan aku tersenyum setiap hari
-                </p>
-                <button class="hero-btn" data-aos="fade-up" data-aos-delay="400">
-                    <span>Buka Pesan Spesial</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
+</div>
 
-                <!-- Countdown -->
-                <div class="countdown-container" data-aos="fade-up" data-aos-delay="300">
-                    <div class="countdown">
-                        <div class="age-now">29</div>
-                        <div class="age-arrow">→</div>
-                        <div class="age-next">30</div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Floating Elements -->
-            <div class="floating-elements">
-                <div class="floating-heart">💕</div>
-                <div class="floating-heart">💕</div>
-                <div class="floating-heart">💕</div>
-            </div>
-        </section>
+<h1 class="loading-title">
 
-        <!-- ROSE PETALS EFFECT -->
-        <div id="rosePetalsContainer" class="petals-container"></div>
+Initializing
 
-        <!-- GALLERY SECTION -->
-        <section class="gallery-section" id="gallerySection">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Kenangan Indah Bersama</h2>
-                <p>Setiap momen adalah cerita cinta yang tak terlupakan</p>
-            </div>
+</h1>
 
-            <div class="gallery-container">
-                <div class="gallery-grid">
-                    <!-- PHOTO 1 -->
-                    <div class="gallery-item" data-aos="fade-up">
-                        <div class="gallery-image-wrapper">
-                            <img src="foto1.jpg" alt="Kenangan indah" class="gallery-image">
-                            <div class="gallery-overlay">
-                                <p class="gallery-caption">Kenangan yang tidak akan pernah aku lupakan</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- PHOTO 2 -->
-                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
-                        <div class="gallery-image-wrapper">
-                            <img src="foto2.jpg" alt="Bersama kamu" class="gallery-image">
-                            <div class="gallery-overlay">
-                                <p class="gallery-caption">Setiap detik bersamamu adalah istimewa</p>
-                            </div>
-                        </div>
-                    </div>
+<p class="loading-description">
 
-                    <!-- PHOTO 3 -->
-                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
-                        <div class="gallery-image-wrapper">
-                            <img src="foto3.jpg" alt="Cinta kami" class="gallery-image">
-                            <div class="gallery-overlay">
-                                <p class="gallery-caption">Kamu adalah rumah yang selalu ingin aku pulang</p>
-                            </div>
-                        </div>
-                    </div>
+Preparing your special experience
 
-                    <!-- PHOTO 4 -->
-                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
-                        <div class="gallery-image-wrapper">
-                            <img src="foto4.jpg" alt="Senyuman" class="gallery-image">
-                            <div class="gallery-overlay">
-                                <p class="gallery-caption">Senyumanmu adalah cahaya terbaikku</p>
-                            </div>
-                        </div>
-                    </div>
+</p>
 
-                    <!-- PHOTO 5 -->
-                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
-                        <div class="gallery-image-wrapper">
-                            <img src="foto5.jpg" alt="Kebersamaan" class="gallery-image">
-                            <div class="gallery-overlay">
-                                <p class="gallery-caption">Terima kasih telah hadir dalam hidupku</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- PHOTO 6 -->
-                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="500">
-                        <div class="gallery-image-wrapper">
-                            <img src="foto6.jpg" alt="Momen spesial" class="gallery-image">
-                            <div class="gallery-overlay">
-                                <p class="gallery-caption">Bersama kamu adalah pilihan terbaiku</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- PHOTO 7 -->
-                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="600">
-                        <div class="gallery-image-wrapper">
-                            <img src="foto7.jpg" alt="Cinta abadi" class="gallery-image">
-                            <div class="gallery-overlay">
-                                <p class="gallery-caption">Selamanya adalah waktu yang tepat untuk kita</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<div class="loading-bar">
 
-        <!-- VIDEO SECTION -->
-        <section class="video-section" id="videoSection">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Momen Spesial Kami</h2>
-            </div>
 
-            <div class="video-container" data-aos="fade-up">
-                <div class="video-wrapper">
-                    <video class="video-player" id="mainVideo">
-                        <source src="video.mp4" type="video/mp4">
-                    </video>
-                    <button class="play-btn" id="playBtn">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <div class="video-glow"></div>
-                </div>
-            </div>
+<div 
+id="loadingProgress"
+class="loading-progress">
 
-            <p class="video-caption" data-aos="fade-up">
-                Setiap detik bersamamu adalah hadiah terbaik dalam hidupku
-            </p>
-        </section>
+</div>
 
-        <!-- LETTER SECTION -->
-        <section class="letter-section" id="letterSection">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Surat Untuk Dirimu</h2>
-                <p>Sesuatu yang ingin aku katakan untukmu</p>
-            </div>
 
-            <div class="letter-container" data-aos="fade-up">
-                <div class="letter-envelope">
-                    <div class="envelope-front"></div>
-                </div>
+</div>
 
-                <div class="letter-content">
-                    <div class="letter-text">
-                        <p class="letter-greeting">Selamat ulang tahun cintaku ❤️</p>
 
-                        <p>Di antara semua hal indah yang pernah hadir dalam hidupku,<br>kamu adalah yang paling berharga.</p>
 
-                        <p>Hari ini adalah hari spesial untuk seseorang yang selalu berhasil membawa kehangatan, ketenangan, dan kebahagiaan ke dalam hidupku.</p>
+<span 
+id="loadingPercentage"
+class="loading-percentage">
 
-                        <p>Aku ingin kamu tahu bahwa kebaikanmu mungkin terlihat sederhana bagimu, tapi buat aku itu adalah sesuatu yang sangat berharga dan tidak mudah dilupakan.</p>
+0%
 
-                        <p><strong>Setiap perhatian kecil yang kamu berikan,<br>setiap usaha yang kamu lakukan,<br>setiap dukungan yang kamu tunjukkan,<br>semuanya selalu memiliki arti yang besar untukku.</strong></p>
+</span>
 
-                        <p>Terima kasih karena selalu berusaha bahkan saat tidak mudah.</p>
 
-                        <p>Aku tahu tidak semua hari berjalan sesuai harapan. Ada saat-saat ketika kamu lelah, ada saat-saat ketika semuanya terasa berat, tetapi kamu tetap memilih untuk bertahan dan memberikan yang terbaik. Dan itu adalah hal yang sangat aku kagumi dari dirimu.</p>
+</div>
 
-                        <p>Terima kasih telah menjadi pribadi yang <strong>kuat, baik, tulus, dan penuh kasih sayang.</strong></p>
 
-                        <p><em>Semoga di usia yang baru ini,<br>semua doa baik yang kamu simpan dalam hati dapat terwujud satu per satu.</em></p>
+</div>
 
-                        <p>Semoga kesehatan selalu menyertaimu,<br>rezeki datang dengan lancar,<br>langkahmu dipermudah,<br>dan hatimu selalu dipenuhi kebahagiaan.</p>
 
-                        <p>Jika suatu hari kamu merasa lelah, ingatlah bahwa ada seseorang yang selalu percaya padamu, mendukungmu, dan mendoakanmu dalam diam.</p>
 
-                        <p>Aku mungkin tidak selalu bisa memberikan yang terbaik, tetapi aku akan selalu berusaha untuk ada di sisimu.</p>
 
-                        <p>Terima kasih untuk semua kenangan, semua tawa, semua cerita, dan semua kebahagiaan yang telah kita lalui bersama.</p>
 
-                        <p><strong>Selamat ulang tahun, sayang.</strong></p>
 
-                        <p>Aku mencintaimu hari ini,<br>besok,<br>minggu depan,<br>tahun depan,<br>dan selama waktu masih berjalan.</p>
 
-                        <p class="letter-closing">Forever yours ❤️</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- ==============================
+MAIN APPLICATION
+============================== -->
 
-        <!-- FOOTER -->
-        <footer class="footer">
-            <div class="footer-content">
-                <p>Made with 💕 for you</p>
-                <p class="footer-date" id="currentDate"></p>
-                <div class="footer-hearts">
-                    <span>❤️</span>
-                    <span>❤️</span>
-                    <span>❤️</span>
-                </div>
-            </div>
-        </footer>
-    </main>
 
-    <!-- MUSIC CONTROL -->
-    <div class="music-control" id="musicControl">
-        <button class="music-btn" id="musicBtn" title="Toggle music">
-            <i class="fas fa-music"></i>
-        </button>
-    </div>
+<div 
+id="app"
+class="app">
 
-    <!-- CONFETTI -->
-    <canvas id="confettiCanvas"></canvas>
 
-    <!-- AUDIO -->
-    <audio id="bgMusic" loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
 
-    <!-- CURSOR GLOW -->
-    <div class="cursor-glow" id="cursorGlow"></div>
 
-    <!-- SCRIPTS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="script.js"></script>
+
+
+
+<!-- ==============================
+OPENING SECTION
+HEADER SEMANTIC
+============================== -->
+
+
+<header
+id="openingSection"
+class="opening-section">
+
+
+<div class="opening-container">
+
+
+
+<p class="opening-label">
+
+A SPECIAL GIFT
+
+</p>
+
+
+
+<h1 class="opening-title">
+
+FOR
+
+</h1>
+
+
+
+<h2 class="opening-name">
+
+Victor
+
+</h2>
+
+
+
+<div class="opening-text">
+
+    <p>
+
+        Made with love, especially for you.
+
+    </p>
+
+    <p>
+
+        Untuk seseorang yang berhasil membuat hari-hari aku
+        jadi penuh makna dan ada di setiap fase
+        pendewasaan hidupku.
+
+    </p>
+
+</div>
+
+<div class="opening-button">
+
+    <button
+        id="beginStory"
+        class="primary-button"
+        type="button">
+
+        Begin Story
+
+        <i class="fa-solid fa-chevron-down"></i>
+
+    </button>
+
+</div>
+
+</header>
+
+
+
+
+<!-- ==============================
+QUIZ SECTION
+============================== -->
+
+
+<section
+id="quizSection"
+class="quiz-section">
+
+
+
+<div class="glass-card">
+
+
+
+<header class="section-header">
+
+
+<p class="section-label">
+
+WELCOME
+
+</p>
+
+
+
+<h2 class="section-title">
+
+Before Opening Your Gift
+
+</h2>
+
+
+
+<p class="section-description">
+
+Jawab beberapa pertanyaan kecil
+sebelum melihat cerita ini 🤍
+
+</p>
+
+
+</header>
+
+
+
+
+
+
+
+<form
+id="quizForm"
+class="quiz-form">
+
+
+
+
+
+
+<article
+class="quiz-item">
+
+
+<h3>
+
+01.Tanggal berapa kita jadian?
+
+
+</h3>
+
+
+
+<label class="quiz-option">
+
+
+<input
+type="radio"
+name="questionOne"
+value="23"
+required>
+
+
+<span>
+
+23
+
+</span>
+
+
+</label>
+
+
+
+
+<label class="quiz-option">
+
+
+<input
+type="radio"
+name="questionOne"
+value="24">
+
+
+<span>
+
+24
+
+</span>
+
+
+</label>
+
+
+
+</article>
+
+
+
+
+
+
+
+
+
+<article
+class="quiz-item">
+
+
+<h3>
+
+02.
+Apa warna favorit fika?
+
+</h3>
+
+
+
+<label class="quiz-option">
+
+
+<input
+type="radio"
+name="questionTwo"
+value="Merah"
+required>
+
+
+<span>
+
+Merah
+
+</span>
+
+
+</label>
+
+
+
+
+<label class="quiz-option">
+
+
+<input
+type="radio"
+name="questionTwo"
+value="Kuning">
+
+
+<span>
+
+Kuning
+
+</span>
+
+
+</label>
+
+
+
+</article>
+
+
+
+
+
+
+
+
+
+<article
+class="quiz-item">
+
+
+<h3>
+
+03.
+Apa yang kamu pilih
+
+</h3>
+
+
+
+<label class="quiz-option">
+
+
+<input
+type="radio"
+name="questionThree"
+value="telfon 10 Jam sama fika"
+required>
+
+
+<span>
+
+telfon 10 Jam sama fika
+
+</span>
+
+
+</label>
+
+
+
+
+<label class="quiz-option">
+
+
+<input
+type="radio"
+name="questionThree"
+value="dengarkan curhatan saudara 3 jam">
+
+
+<span>
+
+dengarkan curhatan saudara 3 jam
+
+</span>
+
+
+</label>
+
+
+
+</article>
+
+
+
+
+
+
+
+
+
+<article
+class="quiz-item">
+
+
+<h3>
+
+04.
+Apa harapan kamu untuk hubungan kita..
+
+</h3>
+
+
+
+<textarea
+
+id="quizMessage"
+
+name="message"
+
+maxlength="500"
+
+placeholder="Tulis sesuatu untukku..."
+
+required>
+
+</textarea>
+
+
+
+<div
+class="character-counter">
+
+
+<span
+id="messageCount">
+
+0
+
+</span>
+
+
+/500
+
+
+</div>
+
+
+
+</article>
+
+
+
+
+
+
+
+<button
+
+type="submit"
+
+class="primary-button">
+
+
+Open Memory
+
+
+<i class="fa-solid fa-heart"></i>
+
+
+</button>
+
+
+
+
+
+</form>
+
+
+</div>
+
+
+</section>
+
+<!-- ==============================
+STORY ENGINE
+MAIN CONTENT
+============================== -->
+
+
+<main
+id="storyEngine"
+class="story-engine">
+
+
+
+
+
+<!-- ==============================
+HERO VIDEO SECTION
+============================== -->
+
+
+<section
+id="heroSection"
+class="hero-section">
+
+
+
+<div class="video-container">
+
+
+<video
+
+id="heroVideo"
+
+class="hero-video"
+
+muted
+
+playsinline
+
+preload="metadata">
+
+
+<source
+src="memory.mp4"
+type="video/mp4">
+
+
+</video>
+
+
+</div>
+
+
+
+
+
+<div class="hero-overlay"></div>
+
+
+
+
+
+<div class="hero-content">
+
+
+
+<p class="hero-label">
+
+A SPECIAL DAY
+
+</p>
+
+
+
+
+<h1 class="hero-title">
+
+Happy Birthday
+
+</h1>
+
+
+
+
+<h2 class="hero-name">
+
+Victor
+
+</h2>
+
+
+
+
+
+<p class="hero-description">
+
+Every moment with you
+became a beautiful story
+that I will always remember.
+
+</p>
+
+
+
+
+
+<div class="scroll-hint">
+
+
+<i class="fa-solid fa-chevron-down"></i>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- ==============================
+MEMORY GALLERY
+============================== -->
+
+
+<section
+
+id="memorySection"
+
+class="memory-section">
+
+
+
+
+
+<header class="section-header">
+
+
+
+<p class="section-label">
+
+OUR MEMORIES
+
+</p>
+
+
+
+
+<h2 class="section-title">
+
+Little Moments,
+Big Memories
+
+</h2>
+
+
+
+
+<p class="section-description">
+
+Beberapa cerita kecil
+yang selalu memiliki arti besar.
+
+</p>
+
+
+
+</header>
+
+
+
+
+
+
+
+
+
+<div
+
+id="memoryTimeline"
+
+class="memory-timeline">
+
+
+
+
+
+
+
+<!-- MEMORY 01 -->
+
+
+<article
+
+class="memory-card"
+
+data-memory="01">
+
+
+
+<div class="memory-image">
+
+
+<img
+
+src="photo-01.jpeg"
+
+alt="Memory photo 01"
+
+loading="lazy">
+
+
+</div>
+
+
+
+
+<div class="memory-content">
+
+
+
+<span class="memory-number">
+
+MEMORY 01
+
+</span>
+
+
+
+
+<h3>
+
+Our Beginning
+
+</h3>
+
+
+
+
+<p
+
+class="typewriter-text">
+
+Aku bersyukur dipertemukan
+dengan seseorang sebaik kamu.
+
+</p>
+
+
+
+</div>
+
+
+
+</article>
+
+
+
+
+
+
+
+
+
+<!-- MEMORY 02 -->
+
+
+<article
+
+class="memory-card"
+
+data-memory="02">
+
+
+
+<div class="memory-image">
+
+
+<img
+
+src="photo-02.jpeg"
+
+alt="Memory photo 02"
+
+loading="lazy">
+
+
+</div>
+
+
+
+
+<div class="memory-content">
+
+
+
+<span class="memory-number">
+
+MEMORY 02
+
+</span>
+
+
+
+
+<h3>
+
+Little Moments
+
+</h3>
+
+
+
+
+<p
+
+class="typewriter-text">
+
+Hal sederhana yang kita lakukan
+selalu berhasil membuatku tersenyum.
+
+</p>
+
+
+
+</div>
+
+
+
+</article>
+
+
+
+
+
+
+
+
+
+<!-- MEMORY 03 -->
+
+
+<article
+
+class="memory-card"
+
+data-memory="03">
+
+
+
+<div class="memory-image">
+
+
+<img
+
+src="photo-03.jpeg"
+
+alt="Memory photo 03"
+
+loading="lazy">
+
+
+</div>
+
+
+
+
+<div class="memory-content">
+
+
+
+<span class="memory-number">
+
+MEMORY 03
+
+</span>
+
+
+
+
+<h3>
+
+Thank You
+
+</h3>
+
+
+
+
+<p
+
+class="typewriter-text">
+
+Terima kasih sudah selalu berusaha
+bahkan ketika semuanya tidak mudah.
+
+</p>
+
+
+
+</div>
+
+
+
+</article>
+
+
+
+
+
+
+
+
+
+<!-- MEMORY 04 -->
+
+
+<article
+
+class="memory-card"
+
+data-memory="04">
+
+
+
+<div class="memory-image">
+
+
+<img
+
+src="photo-04.jpeg"
+
+alt="Memory photo 04"
+
+loading="lazy">
+
+
+</div>
+
+
+
+
+<div class="memory-content">
+
+
+
+<span class="memory-number">
+
+MEMORY 04
+
+</span>
+
+
+
+
+<h3>
+
+Every Smile
+
+</h3>
+
+
+
+
+<p
+
+class="typewriter-text">
+
+Senyummu selalu membuat
+hari-hariku menjadi lebih baik.
+
+</p>
+
+
+
+</div>
+
+
+
+</article>
+
+
+
+
+
+
+
+
+
+<!-- MEMORY 05 -->
+
+
+<article
+
+class="memory-card"
+
+data-memory="05">
+
+
+
+<div class="memory-image">
+
+
+<img
+
+src="photo-05.jpeg"
+
+alt="Memory photo 05"
+
+loading="lazy">
+
+
+</div>
+
+
+
+
+<div class="memory-content">
+
+
+
+<span class="memory-number">
+
+MEMORY 05
+
+</span>
+
+
+
+
+<h3>
+
+Precious Time
+
+</h3>
+
+
+
+
+<p
+
+class="typewriter-text">
+
+Setiap waktu yang kita habiskan
+akan selalu menjadi kenangan indah.
+
+</p>
+
+
+
+</div>
+
+
+
+</article>
+
+
+
+
+
+
+
+
+
+<!-- MEMORY 06 -->
+
+
+<article
+
+class="memory-card"
+
+data-memory="06">
+
+
+
+<div class="memory-image">
+
+
+<img
+
+src="photo-06.jpeg"
+
+alt="Memory photo 06"
+
+loading="lazy">
+
+
+</div>
+
+
+
+
+<div class="memory-content">
+
+
+
+<span class="memory-number">
+
+MEMORY 06
+
+</span>
+
+
+
+
+<h3>
+
+Forever Grateful
+
+</h3>
+
+
+
+
+<p
+
+class="typewriter-text">
+
+Terima kasih sudah hadir
+dalam perjalanan hidupku.
+
+</p>
+
+
+
+</div>
+
+
+
+</article>
+
+
+
+
+
+
+
+
+
+<!-- MEMORY 07 -->
+
+
+<article
+
+class="memory-card"
+
+data-memory="07">
+
+
+
+<div class="memory-image">
+
+
+<img
+
+src="photo-07.jpeg"
+
+alt="Memory photo 07"
+
+loading="lazy">
+
+
+</div>
+
+
+
+
+<div class="memory-content">
+
+
+
+<span class="memory-number">
+
+MEMORY 07
+
+</span>
+
+
+
+
+<h3>
+
+Happy Birthday
+
+</h3>
+
+
+
+
+<p
+
+class="typewriter-text">
+
+Semoga semua impianmu perlahan
+menjadi nyata dan kamu selalu bahagia.
+
+</p>
+
+
+
+</div>
+
+
+
+</article>
+
+
+
+
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ==============================
+STORY TRANSITION
+============================== -->
+
+
+<section
+
+id="transitionSection"
+
+class="transition-section">
+
+
+
+<div class="transition-content">
+
+
+
+<p class="transition-label">
+
+END OF MEMORIES
+
+</p>
+
+
+
+
+<h2>
+
+But...
+
+</h2>
+
+
+
+
+<p>
+
+There is still something
+I want to tell you.
+
+</p>
+
+
+
+
+<div class="scroll-indicator">
+
+
+<i class="fa-solid fa-arrow-down"></i>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+<!-- ==============================
+VIDEO MEMORY SECTION
+============================== -->
+
+
+<section
+
+id="videoSection"
+
+class="video-section">
+
+
+
+<div class="video-wrapper">
+
+
+
+<video
+
+id="memoryVideo"
+
+class="memory-video"
+
+controls
+
+playsinline
+
+preload="metadata">
+
+
+
+<source
+
+src="memory.mp4"
+
+type="video/mp4">
+
+
+
+</video>
+
+
+
+</div>
+
+
+
+
+
+<div class="video-content">
+
+
+
+<p class="section-label">
+
+OUR STORY
+
+</p>
+
+
+
+
+<h2>
+
+Every Second Matters
+
+</h2>
+
+
+
+
+<p>
+
+Satu video,
+seribu kenangan.
+
+</p>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ==============================
+LETTER SECTION
+============================== -->
+
+
+<section
+
+id="letterSection"
+
+class="letter-section">
+
+
+
+<div
+
+class="letter-card">
+
+
+
+
+
+<p class="section-label">
+
+PRIVATE MESSAGE
+
+</p>
+
+
+
+
+
+<h2>
+
+For Victor 🤍
+
+</h2>
+
+
+
+
+
+
+
+<div
+
+id="letterContainer"
+
+class="letter-container">
+
+
+
+
+
+<p
+
+id="typingLetter"
+
+class="typing-letter">
+
+
+</p>
+
+
+
+<span
+
+id="typingCursor"
+
+class="typing-cursor">
+
+|
+
+</span>
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ==============================
+ENDING SECTION
+============================== -->
+
+
+<section
+
+id="endingSection"
+
+class="ending-section">
+
+
+
+<div
+
+class="ending-container">
+
+
+
+
+
+<p class="ending-label">
+
+THANK YOU
+
+</p>
+
+
+
+
+
+
+<h1>
+
+For Existing
+
+</h1>
+
+
+
+
+
+
+
+<p>
+
+You are one of the most
+beautiful chapters
+in my life.
+
+</p>
+
+
+
+
+
+
+<div class="ending-icon">
+
+🤍
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ==============================
+FOOTER
+============================== -->
+
+
+<footer
+
+id="footerSection"
+
+class="footer-section">
+
+
+
+<div class="footer-container">
+
+
+
+
+
+<h2>
+
+Happy Birthday
+
+Victor
+
+</h2>
+
+
+
+
+
+
+<p>
+
+May your days always be filled
+with happiness, health,
+and beautiful memories.
+
+</p>
+
+
+
+
+
+
+<div class="footer-divider"></div>
+
+
+
+
+
+
+<span>
+
+Made With Love 🤍
+
+</span>
+
+
+
+
+
+
+</div>
+
+
+
+</footer>
+
+
+
+
+
+</main>
+
+
+
+
+
+
+
+
+
+<!-- ==============================
+AUDIO BACKGROUND
+============================== -->
+
+
+<audio
+
+id="backgroundMusic"
+
+loop
+
+preload="none">
+
+
+
+<source
+
+src="music.mp3"
+
+type="audio/mpeg">
+
+
+
+</audio>
+
+
+
+
+
+
+
+
+
+<!-- ==============================
+MUSIC CONTROL BUTTON
+============================== -->
+
+
+<button
+
+id="musicButton"
+
+class="music-button"
+
+aria-label="Music Control">
+
+
+
+<i
+
+class="fa-solid fa-volume-high">
+
+</i>
+
+
+
+</button>
+
+
+
+
+
+
+
+
+
+<!-- ==============================
+STORY PROGRESS
+============================== -->
+
+
+<div
+
+id="storyProgress"
+
+class="story-progress">
+
+
+
+<div
+
+id="storyProgressBar"
+
+class="story-progress-bar">
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ==============================
+EFFECT LAYER
+============================== -->
+
+
+<div
+
+id="particleLayer"
+
+class="particle-layer">
+
+</div>
+
+
+
+<div
+
+id="transitionLayer"
+
+class="transition-layer">
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ==============================
+EXTERNAL LIBRARY
+============================== -->
+
+
+
+<script
+
+src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+
+</script>
+
+
+
+<script
+
+src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js">
+
+</script>
+
+
+
+<script
+
+src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js">
+
+</script>
+
+
+
+
+
+
+
+
+
+<!-- ==============================
+MAIN SCRIPT
+============================== -->
+
+
+<script
+
+src="script.js">
+
+</script>
+
+
+
+
+
 </body>
+
+
 </html>

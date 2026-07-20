@@ -1,492 +1,1716 @@
-// ==================== INITIALIZATION ====================
-document.addEventListener('DOMContentLoaded', function() {
-    initAOS();
-    initQuiz();
-    initParticles();
-    initStars();
-    initMusic();
-    initConfetti();
-    initCursorGlow();
-    initScrollAnimations();
-    initPetals();
-    setCurrentDate();
-    setTimeout(() => {
-        document.querySelector('.loading-screen').style.display = 'none';
-    }, 3000);
+/* =====================================
+   DOM ELEMENT
+===================================== */
+
+
+document.addEventListener(
+"DOMContentLoaded",
+() => {
+
+
+const loadingScreen =
+document.getElementById("loadingScreen");
+
+
+const loadingProgress =
+document.getElementById("loadingProgress");
+
+
+const loadingPercentage =
+document.getElementById("loadingPercentage");
+
+
+const beginStoryButton = document.getElementById("beginStory");
+
+beginStoryButton.addEventListener("click", () => {
+
+    document.getElementById("quizSection").scrollIntoView({
+
+        behavior: "smooth"
+
+    });
+
 });
 
-// ==================== AOS INITIALIZATION ====================
-function initAOS() {
-    AOS.init({
-        duration: 800,
-        easing: 'ease-out-cubic',
-        once: true,
-        offset: 100,
-        disable: 'mobile'
-    });
+
+const quizForm =
+document.getElementById("quizForm");
+
+
+const quizSection =
+document.getElementById("quizSection");
+
+
+const storyEngine =
+document.getElementById("storyEngine");
+
+
+const quizMessage =
+document.getElementById("quizMessage");
+
+
+const messageCount =
+document.getElementById("messageCount");
+
+
+
+
+
+/* =====================================
+   LOADING ENGINE
+===================================== */
+
+
+let progress = 0;
+
+
+
+const loadingTimer =
+setInterval(() => {
+
+
+
+progress += 1;
+
+
+
+loadingProgress.style.width =
+`${progress}%`;
+
+
+
+loadingPercentage.textContent =
+`${progress}%`;
+
+
+
+
+
+if(progress >= 100){
+
+
+clearInterval(loadingTimer);
+
+
+
+setTimeout(() => {
+
+
+loadingScreen.style.opacity =
+"0";
+
+
+
+loadingScreen.style.pointerEvents =
+"none";
+
+
+
+setTimeout(() => {
+
+
+loadingScreen.remove();
+
+
+
+},600);
+
+
+
+},500);
+
+
+
 }
 
-// ==================== QUIZ FUNCTIONALITY ====================
-function initQuiz() {
-    const quizForm = document.getElementById('quizForm');
-    const textInput = document.querySelector('.text-input');
-    const charCount = document.getElementById('charCount');
-
-    if (textInput) {
-        textInput.addEventListener('input', function() {
-            charCount.textContent = this.value.length;
-        });
-    }
-
-    quizForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        // Collect answers
-        const answers = {
-            q1: document.querySelector('input[name="q1"]:checked').value,
-            q2: document.querySelector('input[name="q2"]:checked').value,
-            q3: document.querySelector('input[name="q3"]:checked').value,
-            q4: textInput.value
-        };
-
-        // Show success message
-        const submitBtn = quizForm.querySelector('.submit-btn');
-        submitBtn.innerHTML = '<i class="fas fa-heart"></i> Jawaban Diterima!';
-        submitBtn.disabled = true;
-
-        // Create confetti effect
-        createConfetti();
-
-        // Wait and transition
-        await new Promise(resolve => setTimeout(resolve, 1500));
-
-        // Transition animation
-        const quizSection = document.getElementById('quizSection');
-        quizSection.style.opacity = '0';
-        quizSection.style.transform = 'scale(0.95)';
-
-        await new Promise(resolve => setTimeout(resolve, 600));
-
-        // Show main content
-        quizSection.style.display = 'none';
-        document.getElementById('mainContent').style.display = 'block';
-        document.body.style.overflow = 'auto';
-
-        // Refresh AOS
-        setTimeout(() => AOS.refresh(), 100);
-    });
-}
-
-// ==================== PARTICLES ====================
-function initParticles() {
-    const canvas = document.getElementById('particleCanvas');
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2 + 0.5;
-            this.speedX = Math.random() * 0.5 - 0.25;
-            this.speedY = Math.random() * 0.5 - 0.25;
-            this.opacity = Math.random() * 0.5 + 0.3;
-        }
-
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-
-            if (this.x > canvas.width) this.x = 0;
-            if (this.x < 0) this.x = canvas.width;
-            if (this.y > canvas.height) this.y = 0;
-            if (this.y < 0) this.y = canvas.height;
-        }
-
-        draw() {
-            ctx.fillStyle = `rgba(232, 232, 232, ${this.opacity})`;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    // Create particles
-    for (let i = 0; i < 50; i++) {
-        particles.push(new Particle());
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        particles.forEach(particle => {
-            particle.update();
-            particle.draw();
-        });
-
-        requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
-}
-
-// ==================== STARS ====================
-function initStars() {
-    const starsContainer = document.querySelector('.stars-container');
-    if (!starsContainer) return;
-
-    const stars = starsContainer.querySelectorAll('.star');
-    stars.forEach(star => {
-        const x = Math.random() * 100;
-        const y = Math.random() * 100;
-        const duration = Math.random() * 3 + 2;
-        const delay = Math.random() * 5;
-
-        star.style.left = x + '%';
-        star.style.top = y + '%';
-        star.style.animationDuration = duration + 's';
-        star.style.animationDelay = delay + 's';
-    });
-}
-
-// ==================== MUSIC CONTROL ====================
-function initMusic() {
-    const musicBtn = document.getElementById('musicBtn');
-    const bgMusic = document.getElementById('bgMusic');
-
-    if (!musicBtn) return;
-
-    musicBtn.addEventListener('click', function() {
-        if (bgMusic.paused) {
-            bgMusic.play().catch(error => {
-                console.log('Audio play error:', error);
-            });
-            musicBtn.classList.add('playing');
-        } else {
-            bgMusic.pause();
-            musicBtn.classList.remove('playing');
-        }
-    });
-
-    // Auto play when quiz is completed
-    document.getElementById('quizForm').addEventListener('submit', () => {
-        setTimeout(() => {
-            bgMusic.play().catch(error => {
-                console.log('Audio play error:', error);
-            });
-            musicBtn.classList.add('playing');
-        }, 2000);
-    });
-}
-
-// ==================== CONFETTI ====================
-function createConfetti() {
-    const canvas = document.getElementById('confettiCanvas');
-    const ctx = canvas.getContext('2d');
-    
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const confetti = [];
-    const colors = ['#c41e3a', '#e8e8e8', '#3a3a3a', '#ff6b8a'];
-
-    class Confetti {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = -10;
-            this.size = Math.random() * 8 + 4;
-            this.speedX = Math.random() * 8 - 4;
-            this.speedY = Math.random() * 8 + 5;
-            this.rotation = Math.random() * Math.PI * 2;
-            this.rotationSpeed = Math.random() * 0.3 - 0.15;
-            this.color = colors[Math.floor(Math.random() * colors.length)];
-        }
-
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            this.rotation += this.rotationSpeed;
-            this.speedY += 0.1; // Gravity
-        }
-
-        draw() {
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            ctx.rotate(this.rotation);
-            ctx.fillStyle = this.color;
-            ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
-            ctx.restore();
-        }
-    }
-
-    // Create confetti pieces
-    for (let i = 0; i < 100; i++) {
-        confetti.push(new Confetti());
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        for (let i = confetti.length - 1; i >= 0; i--) {
-            const c = confetti[i];
-            c.update();
-
-            if (c.y > canvas.height) {
-                confetti.splice(i, 1);
-            } else {
-                c.draw();
-            }
-        }
-
-        if (confetti.length > 0) {
-            requestAnimationFrame(animate);
-        }
-    }
-
-    animate();
-}
-
-function initConfetti() {
-    // Confetti on page load after quiz
-    const quizForm = document.getElementById('quizForm');
-    if (quizForm) {
-        quizForm.addEventListener('submit', () => {
-            createConfetti();
-        });
-    }
-}
-
-// ==================== CURSOR GLOW ====================
-function initCursorGlow() {
-    const cursorGlow = document.getElementById('cursorGlow');
-    if (!cursorGlow) return;
-
-    document.addEventListener('mousemove', function(e) {
-        cursorGlow.style.left = (e.clientX - 20) + 'px';
-        cursorGlow.style.top = (e.clientY - 20) + 'px';
-        cursorGlow.classList.add('active');
-    });
-
-    document.addEventListener('mouseleave', function() {
-        cursorGlow.classList.remove('active');
-    });
-}
-
-// ==================== SCROLL ANIMATIONS ====================
-function initScrollAnimations() {
-    // Smooth scroll for hero button
-    const heroBtn = document.querySelector('.hero-btn');
-    if (heroBtn) {
-        heroBtn.addEventListener('click', () => {
-            document.getElementById('gallerySection').scrollIntoView({ behavior: 'smooth' });
-        });
-    }
-
-    // Gallery lightbox
-    const galleryImages = document.querySelectorAll('.gallery-image');
-    galleryImages.forEach(img => {
-        img.addEventListener('click', function() {
-            showLightbox(this.src, this.alt);
-        });
-    });
-
-    // Video play functionality
-    const playBtn = document.getElementById('playBtn');
-    const mainVideo = document.getElementById('mainVideo');
-    if (playBtn && mainVideo) {
-        playBtn.addEventListener('click', () => {
-            if (mainVideo.paused) {
-                mainVideo.play();
-                playBtn.style.opacity = '0';
-            } else {
-                mainVideo.pause();
-                playBtn.style.opacity = '1';
-            }
-        });
-
-        mainVideo.addEventListener('play', () => {
-            playBtn.style.opacity = '0';
-        });
-
-        mainVideo.addEventListener('pause', () => {
-            playBtn.style.opacity = '1';
-        });
-    }
-
-    // Letter envelope opening
-    const letterEnvelope = document.querySelector('.envelope-front');
-    const letterContent = document.querySelector('.letter-content');
-    if (letterEnvelope && letterContent) {
-        letterEnvelope.addEventListener('click', function() {
-            this.classList.add('opened');
-            letterContent.classList.add('show');
-        });
-    }
-}
-
-// ==================== PETALS EFFECT ====================
-function initPetals() {
-    const container = document.getElementById('rosePetalsContainer');
-    if (!container) return;
-
-    function createPetal() {
-        const petal = document.createElement('div');
-        petal.className = 'petal';
-        petal.style.left = Math.random() * 100 + '%';
-        petal.style.animationDuration = (Math.random() * 4 + 6) + 's';
-        petal.style.animationDelay = Math.random() * 2 + 's';
-
-        container.appendChild(petal);
-
-        setTimeout(() => petal.remove(), 10000);
-    }
-
-    // Create petals periodically
-    setInterval(createPetal, 500);
-}
-
-// ==================== SET CURRENT DATE ====================
-function setCurrentDate() {
-    const dateElement = document.getElementById('currentDate');
-    if (!dateElement) return;
-
-    const today = new Date();
-    const options = { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-    };
-    const formattedDate = today.toLocaleDateString('id-ID', options);
-    dateElement.textContent = formattedDate;
-}
-
-// ==================== GSAP ANIMATIONS ====================
-gsap.registerPlugin(ScrollTrigger);
-
-// Title animation
-gsap.fromTo('.hero-title', 
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 1, delay: 0.5 }
-);
-
-// Subtitle animation
-gsap.fromTo('.hero-subtitle',
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 1, delay: 0.8 }
-);
-
-// ==================== LIGHTBOX ====================
-function showLightbox(src, alt) {
-    const lightbox = document.createElement('div');
-    lightbox.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-        animation: fadeIn 0.3s ease-out;
-    `;
-
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = alt;
-    img.style.cssText = `
-        max-width: 90%;
-        max-height: 90%;
-        border-radius: 10px;
-        box-shadow: 0 0 50px rgba(196, 30, 60, 0.5);
-        animation: zoomIn 0.3s ease-out;
-    `;
-
-    const closeBtn = document.createElement('button');
-    closeBtn.innerHTML = '×';
-    closeBtn.style.cssText = `
-        position: absolute;
-        top: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        background: rgba(196, 30, 60, 0.9);
-        border: none;
-        color: white;
-        font-size: 32px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        z-index: 10001;
-    `;
-
-    closeBtn.addEventListener('mouseenter', () => {
-        closeBtn.style.background = 'var(--accent-color)';
-        closeBtn.style.transform = 'scale(1.1)';
-    });
-
-    closeBtn.addEventListener('mouseleave', () => {
-        closeBtn.style.background = 'rgba(196, 30, 60, 0.9)';
-        closeBtn.style.transform = 'scale(1)';
-    });
-
-    closeBtn.addEventListener('click', () => {
-        lightbox.style.opacity = '0';
-        setTimeout(() => lightbox.remove(), 300);
-    });
-
-    lightbox.addEventListener('click', function(e) {
-        if (e.target === this) {
-            this.style.opacity = '0';
-            setTimeout(() => this.remove(), 300);
-        }
-    });
-
-    lightbox.appendChild(img);
-    lightbox.appendChild(closeBtn);
-    document.body.appendChild(lightbox);
-
-    // Add fade-in animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes zoomIn {
-            from { 
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to { 
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-// ==================== RESPONSIVE ====================
-window.addEventListener('resize', () => {
-    const canvas = document.getElementById('particleCanvas');
-    if (canvas) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
+
+
+},25);
+
+
+
+
+
+
+
+
+
+/* =====================================
+   OPEN STORY BUTTON
+===================================== */
+
+
+if(beginStoryButton){
+
+
+
+beginStoryButton.addEventListener(
+"click",
+()=>{
+
+
+quizSection.scrollIntoView({
+
+behavior:
+"smooth"
+
 });
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   TEXTAREA COUNTER
+===================================== */
+
+
+if(quizMessage){
+
+
+
+quizMessage.addEventListener(
+"input",
+()=>{
+
+
+
+const length =
+quizMessage.value.length;
+
+
+
+messageCount.textContent =
+length;
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   QUIZ SYSTEM
+===================================== */
+
+
+if(quizForm){
+
+
+
+quizForm.addEventListener(
+"submit",
+(event)=>{
+
+
+event.preventDefault();
+
+
+
+
+const formData =
+new FormData(quizForm);
+
+
+
+const answerOne =
+formData.get(
+"questionOne"
+);
+
+
+
+const answerTwo =
+formData.get(
+"questionTwo"
+);
+
+
+
+const answerThree =
+formData.get(
+"questionThree"
+);
+
+
+
+const message =
+formData.get(
+"message"
+);
+
+
+
+
+
+
+
+
+if(
+!answerOne ||
+!answerTwo ||
+!answerThree ||
+!message
+){
+
+
+alert(
+"Lengkapi semua jawaban dulu ya 🤍"
+);
+
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+/*
+   SIMPAN JAWABAN
+*/
+
+
+localStorage.setItem(
+"victorAnswer",
+JSON.stringify({
+
+one:
+answerOne,
+
+
+two:
+answerTwo,
+
+
+three:
+answerThree,
+
+
+message:
+message
+
+
+})
+);
+
+
+
+
+
+
+
+unlockStory();
+
+
+
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   STORY UNLOCK FUNCTION
+===================================== */
+
+
+function unlockStory(){
+
+
+
+
+
+const heroSection =
+document.getElementById(
+"heroSection"
+);
+
+
+
+
+
+if(heroSection){
+
+
+
+heroSection.scrollIntoView({
+
+behavior:
+"smooth"
+
+});
+
+
+
+}
+
+
+
+
+
+
+startExperience();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   START EXPERIENCE
+===================================== */
+
+
+function startExperience(){
+
+
+
+document.body.classList.add(
+"story-active"
+);
+
+
+
+
+
+console.log(
+"Story Engine Started"
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+});
+
+/* =====================================
+   MUSIC ENGINE
+===================================== */
+
+
+const backgroundMusic =
+document.getElementById(
+"backgroundMusic"
+);
+
+
+const musicButton =
+document.getElementById(
+"musicButton"
+);
+
+
+
+let musicPlaying = false;
+
+
+
+
+
+function startMusic(){
+
+
+
+if(!backgroundMusic)
+return;
+
+
+
+
+backgroundMusic.volume =
+0.35;
+
+
+
+backgroundMusic.play()
+.then(()=>{
+
+
+musicPlaying =
+true;
+
+
+
+updateMusicIcon();
+
+
+
+})
+.catch(()=>{
+
+
+console.log(
+"Music waiting for interaction"
+);
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function toggleMusic(){
+
+
+
+if(!backgroundMusic)
+return;
+
+
+
+
+
+if(musicPlaying){
+
+
+
+backgroundMusic.pause();
+
+
+
+musicPlaying =
+false;
+
+
+
+}else{
+
+
+
+backgroundMusic.play();
+
+
+
+musicPlaying =
+true;
+
+
+
+}
+
+
+
+updateMusicIcon();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function updateMusicIcon(){
+
+
+
+if(!musicButton)
+return;
+
+
+
+
+
+const icon =
+musicButton.querySelector(
+"i"
+);
+
+
+
+
+if(!icon)
+return;
+
+
+
+
+
+if(musicPlaying){
+
+
+
+icon.className =
+"fa-solid fa-volume-high";
+
+
+
+}else{
+
+
+
+icon.className =
+"fa-solid fa-volume-xmark";
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+if(musicButton){
+
+
+
+musicButton.addEventListener(
+"click",
+()=>{
+
+
+toggleMusic();
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+/*
+ANDROID RULE:
+
+Music mulai setelah user
+melakukan interaksi
+*/
+
+
+document.addEventListener(
+"click",
+()=>{
+
+
+if(!musicPlaying){
+
+
+startMusic();
+
+
+}
+
+
+},
+{
+once:true
+}
+
+);
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================
+   TYPEWRITER ENGINE
+===================================== */
+
+
+
+function typeWriter(
+element,
+text,
+speed = 40
+){
+
+
+
+if(!element)
+return;
+
+
+
+
+element.textContent =
+"";
+
+
+
+let index = 0;
+
+
+
+
+
+const typing =
+setInterval(()=>{
+
+
+
+element.textContent +=
+text.charAt(index);
+
+
+
+index++;
+
+
+
+
+
+if(index >= text.length){
+
+
+
+clearInterval(
+typing
+);
+
+
+
+}
+
+
+
+},speed);
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================
+   MEMORY TYPEWRITER
+===================================== */
+
+
+const memoryTexts =
+document.querySelectorAll(
+".typewriter-text"
+);
+
+
+
+
+
+const memoryObserver =
+new IntersectionObserver(
+(entries)=>{
+
+
+
+entries.forEach(
+(entry)=>{
+
+
+
+if(
+entry.isIntersecting
+){
+
+
+
+const element =
+entry.target;
+
+
+
+const text =
+element.textContent.trim();
+
+
+
+
+
+typeWriter(
+element,
+text,
+35
+);
+
+
+
+
+
+memoryObserver.unobserve(
+element
+);
+
+
+
+}
+
+
+
+});
+
+
+},
+{
+
+threshold:
+0.6
+
+}
+
+);
+
+
+
+
+
+
+
+memoryTexts.forEach(
+(item)=>{
+
+
+memoryObserver.observe(
+item
+);
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================
+   LETTER TYPEWRITER
+===================================== */
+
+
+
+const letterElement =
+document.getElementById(
+"typingLetter"
+);
+
+
+
+
+
+const letterMessage =
+
+`Victor,
+
+Happy Birthday, sayangku. 🤍
+
+Hari ini adalah hari yang spesial, bukan hanya karena usiamu bertambah, tetapi karena dunia pernah menghadirkan seseorang sepertimu. Seseorang yang tanpa sadar berhasil mengubah banyak hal dalam hidupku hanya dengan kehadirannya.
+
+Terima kasih sudah menjadi bagian dari perjalanan hidup aku.
+
+Terima kasih karena pernah hadir di setiap cerita yang kita tulis bersama. Terima kasih untuk setiap tawa, setiap pelukan, setiap obrolan panjang, setiap perhatian kecil, dan bahkan untuk setiap perbedaan yang akhirnya mengajarkan kita bagaimana cara memahami satu sama lain.
+
+Aku sadar, hubungan kita tidak selalu berjalan dengan mudah. Ada hari di mana kita sama-sama lelah, ada saat kita berbeda pendapat, ada waktu ketika keadaan terasa begitu berat. Tetapi di balik semua itu, aku belajar bahwa mencintai seseorang bukan hanya tentang menikmati hari-hari yang indah, melainkan juga tentang tetap memilih orang yang sama ketika keadaan sedang tidak sempurna.
+
+Kamu mungkin tidak pernah benar-benar tahu seberapa besar arti kehadiranmu dalam hidupku.
+
+Kamu pernah menjadi tempatku bercerita ketika hariku terasa berat.
+Kamu pernah menjadi alasan kenapa aku tersenyum tanpa sadar.
+Kamu juga pernah menjadi orang yang membuatku percaya bahwa aku pantas dicintai dengan tulus.
+
+Dan untuk semua itu...
+aku benar-benar bersyukur.
+
+Terima kasih karena sudah bersabar menghadapi segala sifatku.
+Terima kasih karena tetap bertahan di saat aku mungkin sulit dimengerti.
+Terima kasih karena sudah menjadi dirimu sendiri.
+
+Kalau suatu hari nanti kamu merasa dunia sedang tidak berpihak kepadamu, aku berharap kamu mengingat satu hal...
+
+Masih ada seseorang yang selalu mendoakanmu diam-diam.
+Seseorang yang ingin melihatmu sehat.
+Melihatmu sukses.
+Melihatmu tersenyum.
+Dan melihat semua impian yang selama ini kamu perjuangkan akhirnya menjadi kenyataan.
+
+Di usia yang baru ini, semoga langkahmu selalu dipenuhi berkat Tuhan.
+Semoga setiap usaha yang kamu lakukan membawa hasil yang terbaik.
+Semoga kesehatan selalu menyertaimu.
+Semoga keluargamu selalu diberikan kebahagiaan.
+Semoga rezekimu semakin luas.
+Dan semoga hatimu selalu dipenuhi rasa damai.
+
+Aku berharap kamu gak pernah kehilangan semangat untuk mengejar semua mimpi yang kamu ceritakan sama ku.
+
+Percayalah...
+Aku akan selalu menjadi orang yang ikut bangga atas setiap pencapaianmu, sekecil apa pun itu.
+
+Terima kasih sudah menjadi salah satu bagian terindah dalam hidup aku ya.
+
+Terima kasih karena telah mengajarkan aku arti sabar, arti percaya, arti menghargai seseorang, dan arti mencintai dengan tulus.
+
+Mungkin aku gak bisa memberikan hadiah yang paling mahal.
+Aku juga gak bisa memberikan sesuatu yang sempurna.
+
+Tapi aku berharap website kecil ini bisa menjadi pengingat...
+bahwa ada seseorang yang meluangkan waktu, tenaga, dan perasaannya hanya untuk membuatmu tersenyum di hari ulang tahunmu.
+
+Karena buat aku...
+
+Senyummu selalu punya cara untuk membuat semuanya terasa lebih baik.
+
+Sekali lagi, Selamat bertambah usia, Victor.
+
+Semoga tahun ini menjadi awal dari banyak kebahagiaan baru, banyak mimpi yang tercapai, dan banyak cerita indah yang akan kamu kenang seumur hidup.
+
+Tetaplah menjadi pribadi yang baik, rendah hati, penyayang, dan selalu membawa kebaikan untuk orang-orang di sekitarmu.
+
+Aku bangga pernah berjalan bersamamu sampai sejauh ini.
+
+Dan apa pun yang akan terjadi nanti...
+aku akan selalu mendoakan yang terbaik untukmu.
+
+Aku berharap bisa tua bersama kamu. Bisa punya keluarga kecil sama kamu. 
+Kalau memang kita memang ditakdirkan bersama, aku harap kamu juga punya semangat untuk memperjuangkan aku dan berubah untuk hubungan kita sampai waktunya kita berjalan bersama di Altar nanti.
+
+
+Thank you for existing.
+Thank you for every memory.
+Thank you for being you.
+
+I love you, always.
+
+with love, fika🤍`;
+
+
+
+
+
+
+
+let letterStarted =
+false;
+
+
+
+
+
+
+
+
+const letterObserver =
+new IntersectionObserver(
+(entries)=>{
+
+
+
+entries.forEach(
+(entry)=>{
+
+
+
+if(
+entry.isIntersecting &&
+!letterStarted
+){
+
+
+
+letterStarted =
+true;
+
+
+
+typeWriter(
+
+letterElement,
+
+letterMessage,
+
+45
+
+);
+
+
+
+}
+
+
+
+});
+
+
+},
+{
+
+threshold:
+0.5
+
+}
+
+);
+
+
+
+
+
+
+
+
+const letterSection =
+document.getElementById(
+"letterSection"
+);
+
+
+
+
+if(letterSection){
+
+
+letterObserver.observe(
+letterSection
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   SCROLL REVEAL
+===================================== */
+
+
+const revealElements =
+document.querySelectorAll(
+".memory-card"
+);
+
+
+
+
+
+
+
+const revealObserver =
+new IntersectionObserver(
+(entries)=>{
+
+
+
+entries.forEach(
+(entry)=>{
+
+
+
+if(
+entry.isIntersecting
+){
+
+
+
+entry.target.style.opacity =
+"1";
+
+
+
+entry.target.style.transform =
+"translateY(0)";
+
+
+
+revealObserver.unobserve(
+entry.target
+);
+
+
+
+}
+
+
+
+});
+
+
+},
+{
+
+threshold:
+0.2
+
+}
+
+);
+
+
+
+
+
+
+
+revealElements.forEach(
+(element)=>{
+
+
+revealObserver.observe(
+element
+);
+
+
+
+});
+
+/* =====================================
+   STORY PROGRESS BAR
+===================================== */
+
+
+const progressBar =
+document.getElementById(
+"storyProgressBar"
+);
+
+
+
+function updateStoryProgress(){
+
+
+
+if(!progressBar)
+return;
+
+
+
+
+
+const scrollTop =
+window.scrollY;
+
+
+
+
+
+const documentHeight =
+document.documentElement.scrollHeight
+-
+window.innerHeight;
+
+
+
+
+
+const progress =
+(scrollTop / documentHeight) * 100;
+
+
+
+
+
+progressBar.style.width =
+`${progress}%`;
+
+
+
+}
+
+
+
+
+
+window.addEventListener(
+"scroll",
+updateStoryProgress
+);
+
+
+
+
+
+
+
+
+
+/* =====================================
+   AUTO SCROLL ENGINE
+===================================== */
+
+
+function autoScrollTo(
+sectionID
+){
+
+
+
+const section =
+document.getElementById(
+sectionID
+);
+
+
+
+
+
+if(section){
+
+
+
+section.scrollIntoView({
+
+behavior:
+"smooth",
+
+block:
+"start"
+
+});
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+const scrollTargets =
+document.querySelectorAll(
+"[data-scroll]"
+);
+
+
+
+
+
+scrollTargets.forEach(
+(button)=>{
+
+
+
+button.addEventListener(
+"click",
+()=>{
+
+
+
+const target =
+button.dataset.scroll;
+
+
+
+autoScrollTo(
+target
+);
+
+
+
+});
+
+
+
+});
+
+
+
+
+
+
+
+
+
+/* =====================================
+   GSAP SCROLL ANIMATION
+===================================== */
+
+
+if(
+typeof gsap !== "undefined"
+&&
+typeof ScrollTrigger !== "undefined"
+){
+
+
+
+gsap.registerPlugin(
+ScrollTrigger
+);
+
+
+
+
+
+
+gsap.utils.toArray(
+".memory-card"
+)
+.forEach(
+(card)=>{
+
+
+
+gsap.to(
+card,
+{
+
+opacity:
+1,
+
+
+y:
+0,
+
+
+duration:
+1,
+
+
+ease:
+"power3.out",
+
+
+
+scrollTrigger:{
+
+
+trigger:
+card,
+
+
+start:
+"top 80%",
+
+
+
+toggleActions:
+"play none none reverse"
+
+
+
+}
+
+
+
+}
+
+);
+
+
+
+});
+
+
+
+
+
+
+
+gsap.from(
+".hero-content",
+{
+
+opacity:
+0,
+
+
+y:
+40,
+
+
+duration:
+1.5,
+
+
+ease:
+"power3.out"
+
+
+
+}
+
+);
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   VIDEO SMART LOADING
+===================================== */
+
+
+const memoryVideo =
+document.getElementById(
+"memoryVideo"
+);
+
+
+
+
+
+if(memoryVideo){
+
+
+
+
+
+const videoObserver =
+new IntersectionObserver(
+(entries)=>{
+
+
+
+entries.forEach(
+(entry)=>{
+
+
+
+if(entry.isIntersecting){
+
+
+
+memoryVideo.play()
+.catch(()=>{});
+
+
+
+}else{
+
+
+
+memoryVideo.pause();
+
+
+
+}
+
+
+
+});
+
+
+},
+{
+
+threshold:
+0.5
+
+}
+
+);
+
+
+
+
+
+videoObserver.observe(
+memoryVideo
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   HERO VIDEO CONTROL
+===================================== */
+
+
+const heroVideo =
+document.getElementById(
+"heroVideo"
+);
+
+
+
+
+if(heroVideo){
+
+
+
+heroVideo.play()
+.catch(()=>{
+
+
+console.log(
+"Hero video waiting"
+);
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   CONFETTI EFFECT
+===================================== */
+
+
+function birthdayConfetti(){
+
+
+
+if(
+typeof confetti === "undefined"
+)
+return;
+
+
+
+
+
+
+confetti({
+
+particleCount:
+120,
+
+spread:
+100,
+
+origin:
+
+{
+
+y:
+0.6
+
+}
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+const endingSection =
+document.getElementById(
+"endingSection"
+);
+
+
+
+
+
+if(endingSection){
+
+
+
+const endingObserver =
+new IntersectionObserver(
+(entries)=>{
+
+
+
+entries.forEach(
+(entry)=>{
+
+
+
+if(entry.isIntersecting){
+
+
+
+birthdayConfetti();
+
+
+
+endingObserver.unobserve(
+endingSection
+);
+
+
+
+}
+
+
+
+});
+
+
+},
+{
+
+threshold:
+0.6
+
+}
+
+);
+
+
+
+
+
+endingObserver.observe(
+endingSection
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   PAGE READY MESSAGE
+===================================== */
+
+
+console.log(
+`
+============================
+
+Birthday Story Engine Ready 🤍
+
+✓ Loading System
+✓ Quiz Gate
+✓ Music Engine
+✓ Typewriter
+✓ Story Scroll
+✓ Video Observer
+✓ Progress Bar
+
+============================
+`
+);
